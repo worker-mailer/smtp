@@ -1,0 +1,15 @@
+node_modules/
+dist/
+
+.env
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+
+# Cloudflare
+.wrangler/
+
+scripts/
