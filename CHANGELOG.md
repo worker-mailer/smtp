@@ -37,7 +37,7 @@
 - 2224ada: add custom error classes (InvalidEmailError, SmtpAuthError, SmtpConnectionError, SmtpRecipientError, SmtpTimeoutError, InvalidContentError)
 - 2224ada: add support for inline attachments with Content-ID (CID) for embedding images in HTML emails
 - 2224ada: add lifecycle hooks (onConnect, onSent, onError, onClose) for monitoring email operations
-- 2224ada: add optional Cloudflare Queues integration for async email processing (`@ribassu/worker-mailer/queue`)
+- 2224ada: add optional Cloudflare Queues integration for async email processing (`@workermailer/smtp/queue`)
 - b6ea3d8: fix duplicated `types` field in `package.json`
 - 2068ddf: configure npm registry URL in publish workflow
 

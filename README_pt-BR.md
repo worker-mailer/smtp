@@ -36,7 +36,7 @@ Worker Mailer é um cliente SMTP que roda em Cloudflare Workers. Utiliza [Cloudf
 ## Instalação
 
 ```shell
-npm i @ribassu/worker-mailer
+npm i @workermailer/smtp
 ```
 
 ## Início Rápido
@@ -51,7 +51,7 @@ compatibility_flags = ["nodejs_compat"]
 2. Use no seu código:
 
 ```typescript
-import { WorkerMailer } from '@ribassu/worker-mailer'
+import { WorkerMailer } from '@workermailer/smtp'
 
 // Conectar ao servidor SMTP
 const mailer = await WorkerMailer.connect({
@@ -91,7 +91,7 @@ export default defineEventHandler(async event => {
     return await transporter.sendMail()
   } else {
     // Produção: Usar worker-mailer no ambiente Cloudflare Workers
-    const { WorkerMailer } = await import('@ribassu/worker-mailer')
+    const { WorkerMailer } = await import('@workermailer/smtp')
     const mailer = await WorkerMailer.connect()
     return await mailer.send()
   }
@@ -253,7 +253,7 @@ await WorkerMailer.send(
 Você pode incorporar imagens diretamente em emails HTML usando Content-ID (CID):
 
 ```typescript
-import { WorkerMailer } from '@ribassu/worker-mailer'
+import { WorkerMailer } from '@workermailer/smtp'
 
 const mailer = await WorkerMailer.connect({
   host: 'smtp.acme.com',
@@ -287,7 +287,7 @@ await mailer.send({
 Monitore operações de email com hooks de ciclo de vida:
 
 ```typescript
-import { WorkerMailer } from '@ribassu/worker-mailer'
+import { WorkerMailer } from '@workermailer/smtp'
 
 const mailer = await WorkerMailer.connect({
   host: 'smtp.acme.com',
@@ -328,7 +328,7 @@ import {
   SmtpRecipientError,
   SmtpTimeoutError,
   InvalidContentError,
-} from '@ribassu/worker-mailer'
+} from '@workermailer/smtp'
 
 try {
   const mailer = await WorkerMailer.connect({
@@ -382,12 +382,12 @@ max_retries = 3
 2. Crie seu worker com handler de queue:
 
 ```typescript
-import { WorkerMailer } from '@ribassu/worker-mailer'
+import { WorkerMailer } from '@workermailer/smtp'
 import {
   createQueueHandler,
   enqueueEmail,
   type QueueEmailMessage,
-} from '@ribassu/worker-mailer/queue'
+} from '@workermailer/smtp/queue'
 
 interface Env {
   EMAIL_QUEUE: Queue<QueueEmailMessage>
@@ -434,7 +434,7 @@ import {
   enqueueEmail,
   enqueueEmails,
   type QueueEmailMessage,
-} from '@ribassu/worker-mailer/queue'
+} from '@workermailer/smtp/queue'
 
 // Enfileirar um único email
 await enqueueEmail(env.EMAIL_QUEUE, {

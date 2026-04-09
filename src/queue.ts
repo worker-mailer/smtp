@@ -29,7 +29,7 @@ export type QueueProcessResult = {
  * @example
  * ```typescript
  * // In your worker:
- * import { createQueueHandler } from '@ribassu/worker-mailer/queue'
+ * import { createQueueHandler } from '@workermailer/smtp/queue'
  *
  * export default {
  *   async queue(batch, env, ctx) {
@@ -99,7 +99,7 @@ export function createQueueHandler(options?: {
  *
  * @example
  * ```typescript
- * import { enqueueEmail } from '@ribassu/worker-mailer/queue'
+ * import { enqueueEmail } from '@workermailer/smtp/queue'
  *
  * await enqueueEmail(env.EMAIL_QUEUE, {
  *   mailerOptions: { host: 'smtp.example.com', port: 587, ... },
@@ -119,7 +119,7 @@ export async function enqueueEmail(
  *
  * @example
  * ```typescript
- * import { enqueueEmails } from '@ribassu/worker-mailer/queue'
+ * import { enqueueEmails } from '@workermailer/smtp/queue'
  *
  * await enqueueEmails(env.EMAIL_QUEUE, [
  *   { mailerOptions: {...}, emailOptions: {...} },
