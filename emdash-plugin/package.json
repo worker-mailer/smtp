@@ -1,0 +1,24 @@
+{
+  "name": "@workermailer/emdash-smtp",
+  "version": "0.1.4",
+  "description": "EmDash email transport plugin backed by @workermailer/smtp.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    },
+    "./sandbox": {
+      "import": "./dist/sandbox-entry.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup --config tsup.config.ts"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "dependencies": {
+    "emdash": "*"
+  }
+}

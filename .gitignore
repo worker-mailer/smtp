@@ -1,5 +1,7 @@
 node_modules/
 dist/
+emdash-plugin/dist/
+emdash-plugin/.emdash-bundle-tmp/
 .maps/
 *.map
 *.tsbuildinfo
