@@ -1,5 +1,8 @@
 node_modules/
 dist/
+.maps/
+*.map
+*.tsbuildinfo
 
 .env
 
@@ -13,3 +16,4 @@ dist/
 .wrangler/
 
 scripts/
+.dev/

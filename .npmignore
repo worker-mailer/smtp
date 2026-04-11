@@ -3,3 +3,12 @@
 !dist/**
 !package.json
 !README.md
+!README_pt-BR.md
+!LICENSE
+
+# Never publish local/dev artifacts
+.dev/
+.maps/
+*.map
+dist/**/*.map
+*.tsbuildinfo

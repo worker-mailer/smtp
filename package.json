@@ -1,6 +1,7 @@
 {
   "name": "@workermailer/smtp",
   "version": "0.1.1",
+  "description": "SMTP client for Cloudflare Workers with queue support and email utilities.",
   "packageManager": "bun@1.3.11",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -34,6 +35,21 @@
   },
   "license": "MIT",
   "homepage": "https://workermailer.com",
+  "marketplace": {
+    "pluginId": "@workermailer/smtp"
+  },
+  "plugin": {
+    "id": "@workermailer/smtp",
+    "capabilities": [
+      "smtp.send",
+      "email.compose",
+      "queue.enqueue"
+    ],
+    "permissions": [
+      "network.smtp",
+      "queue"
+    ]
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
