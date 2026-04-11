@@ -1,6 +1,6 @@
 {
   "name": "@workermailer/smtp",
-  "version": "0.1.4",
+  "version": "0.1.2",
   "description": "SMTP client for Cloudflare Workers with queue support and email utilities.",
   "packageManager": "bun@1.3.11",
   "main": "./dist/index.js",
