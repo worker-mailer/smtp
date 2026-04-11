@@ -2,7 +2,7 @@
 
 [English](./README.md) | [Português](./README_pt-BR.md)
 
-[![npm version](https://badge.fury.io/js/@workermailer%2Fworker-mailer.svg)](https://badge.fury.io/js/@workermailer%2Fworker-mailer)
+[![npm version](https://badge.fury.io/js/@workermailer%2Fsmtp.svg)](https://badge.fury.io/js/@workermailer%2Fsmtp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Worker Mailer is an SMTP client that runs on Cloudflare Workers. It leverages [Cloudflare TCP Sockets](https://developers.cloudflare.com/workers/runtime-apis/tcp-sockets/) and doesn't rely on any other dependencies.

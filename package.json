@@ -31,7 +31,7 @@
   "author": "André Ribas (@RibasSu)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RibasSu/worker-mailer.git"
+    "url": "git+https://github.com/worker-mailer/smtp.git"
   },
   "license": "MIT",
   "homepage": "https://workermailer.com",
