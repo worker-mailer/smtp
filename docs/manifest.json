@@ -1,0 +1,65 @@
+{
+  "title": "SMTP docs",
+  "description": "Developer-first documentation for @workermailer/smtp on Cloudflare Workers.",
+  "defaultPage": "overview",
+  "groups": [
+    {
+      "title": "Get started",
+      "pages": [
+        {
+          "slug": "overview",
+          "title": "Overview",
+          "summary": "What the SMTP package does, when to use it, and what ships today.",
+          "source": "docs/overview.md"
+        },
+        {
+          "slug": "installation",
+          "title": "Installation",
+          "summary": "Install with Bun, enable the right Worker runtime flags, and prepare local development.",
+          "source": "docs/installation.md"
+        },
+        {
+          "slug": "quickstart",
+          "title": "Quickstart",
+          "summary": "Connect, send your first message, and pick the best integration style for your app.",
+          "source": "docs/quickstart.md"
+        }
+      ]
+    },
+    {
+      "title": "Guides",
+      "pages": [
+        {
+          "slug": "api-reference",
+          "title": "API reference",
+          "summary": "The main types, entry points, and delivery options exposed by the package.",
+          "source": "docs/api-reference.md"
+        },
+        {
+          "slug": "attachments-and-cid",
+          "title": "Attachments and inline images",
+          "summary": "Send files, embed CID assets, and understand the message shape.",
+          "source": "docs/attachments-and-cid.md"
+        },
+        {
+          "slug": "hooks-and-errors",
+          "title": "Hooks and errors",
+          "summary": "Observe delivery lifecycle events and handle SMTP-specific failures.",
+          "source": "docs/hooks-and-errors.md"
+        },
+        {
+          "slug": "queues",
+          "title": "Queues",
+          "summary": "Push delivery off the request path with Cloudflare Queues helpers.",
+          "source": "docs/queues.md"
+        },
+        {
+          "slug": "emdash",
+          "title": "EmDash bundle",
+          "summary": "Build and publish the sandbox bundle that lives alongside the SMTP library.",
+          "source": "docs/emdash.md"
+        }
+      ]
+    }
+  ]
+}
