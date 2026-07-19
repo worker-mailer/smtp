@@ -11,17 +11,17 @@ import {
 
 describe('WorkerMailerError', () => {
   it('should be an instance of Error', () => {
-    const error = new WorkerMailerError('test')
+    const error = new WorkerMailerError('test', 'TEST')
     expect(error).toBeInstanceOf(Error)
   })
 
   it('should have correct name', () => {
-    const error = new WorkerMailerError('test')
+    const error = new WorkerMailerError('test', 'TEST')
     expect(error.name).toBe('WorkerMailerError')
   })
 
   it('should store message', () => {
-    const error = new WorkerMailerError('test message')
+    const error = new WorkerMailerError('test message', 'TEST')
     expect(error.message).toBe('test message')
   })
 })

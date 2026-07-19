@@ -453,7 +453,7 @@ export class WorkerMailer {
     const challenge = atob(challengeWithBase64Encoded)
 
     // Import password as key
-    const keyData = encode(this.credentials!.password)
+    const keyData = new Uint8Array(encode(this.credentials!.password)).buffer
     const key = await crypto.subtle.importKey(
       'raw',
       keyData,
@@ -463,7 +463,7 @@ export class WorkerMailer {
     )
 
     // Sign the challenge
-    const challengeData = encode(challenge)
+    const challengeData = new Uint8Array(encode(challenge)).buffer
     const signature = await crypto.subtle.sign('HMAC', key, challengeData)
 
     // Convert to hex
