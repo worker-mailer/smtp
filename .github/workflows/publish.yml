@@ -1,35 +1,47 @@
-name: Publish to NPM
+name: Publish Packages
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 permissions:
   contents: read
-  id-token: write
+
+concurrency:
+  group: publish-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
 
 jobs:
-  publish:
-    name: Publish Package
+  build:
+    name: Test and build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+          bun-version: 1.3.14
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: Verify release version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          package_version="$(node -p "require('./package.json').version")"
+          if [[ "v${package_version}" != "$RELEASE_TAG" ]]; then
+            echo "Release tag $RELEASE_TAG does not match package version v${package_version}." >&2
+            exit 1
+          fi
+
+      - name: Typecheck
+        run: bun run typecheck
 
       - name: Run tests
         run: bun run test
@@ -37,5 +49,75 @@ jobs:
       - name: Build package
         run: bun run build
 
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-dist
+          path: dist
+          if-no-files-found: error
+
+  publish-npm:
+    name: Publish to npm
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Download package artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: package-dist
+          path: dist
+
       - name: Publish to npm
-        run: npm publish --provenance --access public
+        run: npm publish --access public
+
+  publish-github-packages:
+    name: Publish to GitHub Packages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+          scope: '@worker-mailer'
+          package-manager-cache: false
+
+      - name: Download package artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: package-dist
+          path: dist
+
+      - name: Prepare GitHub Packages name
+        run: node -e 'const fs=require("fs");const p=require("./package.json");p.name="@worker-mailer/smtp";p.publishConfig={access:"public",registry:"https://npm.pkg.github.com"};fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n")'
+
+      - name: Publish to GitHub Packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
